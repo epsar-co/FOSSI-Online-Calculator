@@ -1,5 +1,6 @@
 
 import streamlit as st
+import supabase
 
 import uuid
 from datetime import datetime
