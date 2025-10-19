@@ -207,6 +207,157 @@ if calc:
         unsafe_allow_html=True
     )
 
+    # =========================
+#   FOSSI PLOT (Python)
+# =========================
+import io
+import numpy as np
+import matplotlib.pyplot as plt
+
+def make_fossi_curve(is_female: bool):
+    """
+    Devuelve (x, prob, cutoffs, zones, title, subtitle, x_limits) replicando el script R.
+    - Mujeres: sigmoide 1/(1+exp(-1.2*(x-8.7))) con x en [2.5, 16.5]
+    - Hombres: curva más 'vertical' alrededor del corte 0.71 (ajuste ilustrativo)
+    """
+    if is_female:
+        x = np.linspace(2.5, 16.5, 600)
+        prob = 1/(1 + np.exp(-1.2*(x - 8.7)))
+        cutoffs = [5.84, 7.88, 9.58]
+        zones = ["Low", "Intermediate", "High", "Very high"]
+        title = "FOSSI-F (women): Non-linear risk"
+        subtitle = "Sigmoid trajectory with wide transition zone"
+        x_limits = (2.5, 16.5)
+    else:
+        # --- FOSSI-M: near-vertical tipping point 0.45–0.71 ---
+        x = np.linspace(0.40, 1.00, 600)
+        baseline, top, center, slope = 0.12, 0.98, 0.58, 92
+        # Reproduce el comportamiento de plogis((x-center)*slope)
+        prob = np.where(
+            x < 0.45, baseline,
+            np.where(
+                x > 0.71, top,
+                baseline + (top - baseline) / (1 + np.exp(-(x - center) * slope))
+            )
+        )
+        cutoffs = [0.71]
+        zones = ["Grey/Low", "High"]
+        title = "FOSSI-M: Non-linear risk"
+        subtitle = "Near-vertical tipping point (0.45–0.71); ROC cut-off at 0.71"
+        x_limits = (0.40, 1.00)
+    return x, prob, cutoffs, zones, title, subtitle, x_limits
+
+def plot_fossi_curve_py(x, prob, cutoffs, zones, patient_x, title, subtitle, x_limits):
+    import io
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Patch
+    from matplotlib.lines import Line2D
+
+    all_breaks = [-np.inf] + list(cutoffs) + [np.inf]
+    xmin, xmax = x_limits
+
+    # Colores zonas (gris, amarillo, naranja, rojo)
+    if len(zones) == 4:
+        fills = [(0.83,0.83,0.83,0.35), (1.0,1.0,0.0,0.35), (1.0,0.65,0.0,0.35), (1.0,0.0,0.0,0.2)]
+    else:
+        fills = [(0.83,0.83,0.83,0.35), (1.0,0.0,0.0,0.25)]
+
+    # ↑ altura mayor y márgenes
+    fig, ax = plt.subplots(figsize=(7.5,6.2))
+    fig.subplots_adjust(top=0.80, bottom=0.12, left=0.10, right=0.98)
+
+    # Rectángulos por zona
+    for i in range(len(zones)):
+        z_xmin = max(all_breaks[i], xmin)
+        z_xmax = min(all_breaks[i+1], xmax)
+        if z_xmin < z_xmax:
+            ax.axvspan(z_xmin, z_xmax, ymin=0, ymax=1, facecolor=fills[i], edgecolor=None)
+
+    # Línea de prob
+    prob_line, = ax.plot(x, prob, linewidth=2, label="FO probability")
+
+    # Líneas de corte (una sola entrada en leyenda para todos)
+    cutoff_handles = []
+    for j, c in enumerate(cutoffs):
+        if xmin <= c <= xmax:
+            ax.axvline(c, linestyle="--", linewidth=1, color="black")
+            if j == 0:
+                cutoff_handles = [Line2D([0], [0], color="black", linestyle="--", linewidth=1, label="Cut-offs")]
+
+    # Punto del paciente
+    patient_handle = []
+    if patient_x is not None:
+        if patient_x <= x.min():
+            p_y = prob[0]
+        elif patient_x >= x.max():
+            p_y = prob[-1]
+        else:
+            i = np.searchsorted(x, patient_x) - 1
+            i = np.clip(i, 0, len(x)-2)
+            t = (patient_x - x[i]) / (x[i+1]-x[i])
+            p_y = prob[i] + t*(prob[i+1]-prob[i])
+
+        ax.plot([patient_x], [p_y], marker='o', markersize=6,
+                markeredgecolor='black', markerfacecolor='white', linewidth=0)
+        ax.text(patient_x, min(1.0, p_y + 0.05), f"Patient: {patient_x:.2f}",
+                fontsize=10, fontweight='bold', ha='center', va='bottom')
+        patient_handle = [Line2D([0],[0], marker='o', linestyle='None',
+                                 markerfacecolor='white', markeredgecolor='black',
+                                 markersize=6, label="Patient")]
+
+    # Ejes y títulos
+    ax.set_xlim(x_limits)
+    ax.set_ylim(0, 1)
+    ax.set_ylabel("Probability of Fast Ossifier (FO)")
+    ax.set_xlabel("FOSSI value and clinical cut-off points (dashed lines)")
+
+    # Usamos suptitle (título principal) + título del eje (como subtítulo) para evitar solapes
+    fig.suptitle(title, fontsize=14, fontweight='bold', y=0.94)
+    ax.set_title(subtitle, fontsize=11, pad=8)
+
+    # Grid y ticks %
+    ax.grid(True, which='major', linewidth=0.6, alpha=0.5)
+    yticks = np.linspace(0,1,6)
+    ax.set_yticks(yticks)
+    ax.set_yticklabels([f"{int(y*100)}%" for y in yticks])
+
+    # Leyenda: parches para zonas
+    zone_patches = [Patch(facecolor=fills[i], edgecolor='none', label=zones[i]) for i in range(len(zones))]
+    handles = zone_patches + cutoff_handles
+
+    # Colocamos la leyenda arriba fuera del área del gráfico para no tapar títulos
+    leg = ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.5, 1.2),
+                    ncol=len(handles), frameon=False)
+
+    # Asegurar buen layout final
+    plt.tight_layout(rect=[0.02, 0.02, 0.98, 0.94])  # deja sitio al suptitle y leyenda
+
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png", dpi=300, bbox_inches="tight")
+    buf.seek(0)
+    plt.close(fig)
+    return buf
+
+
+# ------ Renderizar en la UI tras calcular ------
+if calc:
+    x, prob, cutoffs, zones, title, subtitle, x_limits = make_fossi_curve(is_female)
+    png_buf = plot_fossi_curve_py(x, prob, cutoffs, zones, fossi, title, subtitle, x_limits)
+
+    st.subheader("Risk curve")
+    st.image(png_buf, caption="FOSSI probability curve with clinical cut-offs and patient marker", use_container_width=True)
+
+    st.download_button(
+        "Download PNG",
+        data=png_buf,
+        file_name=f"{'FOSSI_F' if is_female else 'FOSSI_M'}_{fossi:.2f}.png",
+        mime="image/png",
+        type="secondary",
+        help="Save the figure as a 300 dpi PNG"
+    )
+
+
     with st.expander("Details and derived indices"):
         colA, colB = st.columns(2)
         colA.metric("CMI", format_number(cmi, 3))
