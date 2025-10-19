@@ -91,14 +91,14 @@ if supabase:
 st.markdown(
     """
 **What is FOSSI?**  
-FOSSI (Fast Ossifier Stratification Index) provides sex-specific risk stratification for accelerated ossification in DISH:
+FOSSI (Fast Ossifier Stratification Index) provides sex-specific risk stratification for accelerated ossification and early trabecular impairment in DISH:
 - **FOSSI-F (females)** — predominantly insulin resistance–driven  
-- **FOSSI-M (males)** — inflammation / endocrine–driven  
+- **FOSSI-M (males)** — inflammation / endocrine–driven
 
-This calculator implements the validated equations and thresholds described in the FOSSI manuscript.
+This calculator implements the validated equations and thresholds described in the FOSSI manuscript:  
+*Pariente et al., Fast Ossifier Stratification Index (FOSSI): A propensity score–derived tool in DISH (Oct 2025, submitted).*
 """
 )
-
 st.divider()
 
 with st.expander("Input settings", expanded=True):
@@ -235,7 +235,9 @@ st.markdown(
 )
 
 st.caption(
-    "References: Pariente et al., RMD Open (2025) 11:e006024. "
-    "This tool provides research-oriented risk stratification and does not replace clinical judgement. "
-    "Basic anonymous usage metrics (visit/calculate) may be recorded to improve the service."
+    "References: Pariente et al., 'Fast Ossifier in DISH.' RMD Open, Sept 2025. "
+    "https://doi.org/10.1136/rmdopen-2025-006024 | "
+    "'Fast Ossifier Stratification Index (FOSSI): A propensity score-derived tool in DISH' "
+    "(Oct 2025, submitted).\n\n"
+    "This tool provides research-oriented risk stratification and does not replace clinical judgment. "
 )
