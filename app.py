@@ -371,14 +371,12 @@ if calc:
 
 st.divider()
 
-st.markdown("**FOSSI-F (females)**")
-st.latex(r"\text{FOSSI-F}=-18.811+0.209\,Age+0.350\,BMI+1.359\,CMI+0.799\,Hypertension+0.203\,VAI")
-
-st.markdown("**FOSSI-M (males)**")
-st.latex(r"\text{FOSSI-M}=-4.663+0.039\,Age+0.045\,BMI-0.223\,CMI+0.015\,WC")
-
 st.markdown(
     """
+**Equation summary**  
+- **FOSSI-F (females):** -18.811 + (0.209×Age) + (0.350×BMI) + (1.359×CMI) + (0.799×Hypertension) + (0.203×VAI)  
+- **FOSSI-M (males):** -4.663 + (0.039×Age) + (0.045×BMI) - (0.223×CMI) + (0.015×WC)
+
 **Thresholds**  
 - **Women:** <5.84 (Low), 5.84–7.88 (Intermediate), 7.89–9.58 (High), >9.58 (Very High)  
 - **Men:** <0.71 (Grey zone), ≥0.71 (High/Very High)
