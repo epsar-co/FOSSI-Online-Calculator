@@ -18,7 +18,7 @@ FOSSI_M = -4.663 + (0.039 × Age) + (0.045 × BMI) – (0.223 × CMI) + (0.015 �
 ---
 
 ## 🚀 Online Calculator
-The easiest way to use FOSSI is via the **[FOSSI Online Calculator](https://epsar-co--fossi-online-calculator-app-1idwyr.streamlit.app/)** (Streamlit Cloud).  
+The easiest way to use FOSSI is via the **[FOSSI Online Calculator](https://-fossi-online-calculator-app-1idwyr.streamlit.app/)** (Streamlit Cloud).  
 👉 Input patient data and obtain FOSSI-F or FOSSI-M with risk categories.
 
 ---
