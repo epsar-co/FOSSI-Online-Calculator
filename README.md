@@ -18,16 +18,25 @@ FOSSI_M = -4.663 + (0.039 × Age) + (0.045 × BMI) – (0.223 × CMI) + (0.015 �
 ---
 
 ## 🚀 Online Calculator
+<<<<<<< HEAD
 The easiest way to use FOSSI is via the **[FOSSI Online Calculator](https://fossi-online-calculator.streamlit.app/)** (Streamlit Cloud).  
+=======
+The easiest way to use FOSSI is via the **[FOSSI Online Calculator](https://fossi-online-calculator-app-1idwyr.streamlit.app/)** (Streamlit Cloud).  
+>>>>>>> fd42f38 (feat: update readme)
 👉 Input patient data and obtain FOSSI-F or FOSSI-M with risk categories.
 
 ---
 
 💻 Local Installation
 
+
 Clone the repo and install dependencies:
 
+<<<<<<< HEAD
 git clone https://github.com/epsar-co/FOSSI-Online-Calculator.git
+=======
+git clone https://github.com/epsar-co/fossi-online-calculator.git
+>>>>>>> fd42f38 (feat: update readme)
 cd fossi-calculator
 pip install -r requirements.txt
 streamlit run app.py
@@ -51,3 +60,4 @@ RMD Open. 2025;11:e006024. https://doi.org/10.1136/rmdopen-2025-006024
 
 ✉️ For questions or collaborations, please contact:
 Emilio Pariente (MD, PhD) – emilio.pariente@scsalud.es
+
