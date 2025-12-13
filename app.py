@@ -97,7 +97,14 @@ FOSSI (Fast Ossifier Stratification Index) provides sex-specific risk stratifica
 
 This calculator implements the validated equations and thresholds described in the FOSSI manuscript:  
 *Pariente et al., Fast Ossifier Stratification Index (FOSSI): A propensity score–derived tool in DISH (Oct 2025, submitted).*
+
+*** Current status and ongoing development ***
+FOSSICalc is provided as an open, research-oriented implementation of the Fast Ossifier Stratification Index (FOSSI), derived from a propensity score–based modelling framework.
+Ongoing work is focused on **refining specific aspects of its implementation, including the definition and delimitation of the target population** for which the equations are most appropriate. These efforts aim to optimise interpretability, avoid extrapolation beyond the model’s empirical support, and enhance future clinical applicability.
+**This version should therefore be regarded as provisional.** FOSSICalc will be designated as a final and fully validated release once the methodological foundations and **internal validation of FOSSI have been formally published in a peer-reviewed specialty journal.**
+Until then, the tool is intended for research, exploratory analyses, and methodological transparency, rather than for standalone clinical decision-making.
 """
+
 )
 st.divider()
 
@@ -386,9 +393,7 @@ st.markdown(
 )
 
 st.caption(
-    "References: Pariente et al., 'Fast Ossifier in DISH.' RMD Open, Sept 2025. "
-    "https://doi.org/10.1136/rmdopen-2025-006024 | "
-    "'Fast Ossifier Stratification Index (FOSSI): A propensity score-derived tool in DISH' "
-    "(Oct 2025, submitted).\n\n"
+    "Reference: Pariente et al., 'Fast Ossifier in DISH.' RMD Open, Sept 2025. "
+    "https://doi.org/10.1136/rmdopen-2025-006024\n\n"
     "This tool provides research-oriented risk stratification and does not replace clinical judgment. "
 )
