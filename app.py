@@ -28,7 +28,7 @@ except Exception:
 SUPABASE_URL = st.secrets.get("SUPABASE_URL")
 SUPABASE_ANON_KEY = st.secrets.get("SUPABASE_ANON_KEY")
 
-supabase: Optional["Client"] = None
+supabase: Optional["Client"] = None # type: ignore
 if create_client and SUPABASE_URL and SUPABASE_ANON_KEY:
     try:
         supabase = create_client(SUPABASE_URL, SUPABASE_ANON_KEY)
