@@ -98,11 +98,17 @@ FOSSI (Fast Ossifier Stratification Index) provides sex-specific risk stratifica
 This calculator implements the validated equations and thresholds described in the FOSSI manuscript:  
 *Pariente et al., Fast Ossifier Stratification Index (FOSSI): A propensity score–derived tool in DISH (Oct 2025, submitted).*
 
-*** Current status and ongoing development ***
-FOSSICalc is provided as an open, research-oriented implementation of the Fast Ossifier Stratification Index (FOSSI), derived from a propensity score–based modelling framework.
-Ongoing work is focused on **refining specific aspects of its implementation, including the definition and delimitation of the target population** for which the equations are most appropriate. These efforts aim to optimise interpretability, avoid extrapolation beyond the model’s empirical support, and enhance future clinical applicability.
-**This version should therefore be regarded as provisional.** FOSSICalc will be designated as a final and fully validated release once the methodological foundations and **internal validation of FOSSI have been formally published in a peer-reviewed specialty journal.**
-Until then, the tool is intended for research, exploratory analyses, and methodological transparency, rather than for standalone clinical decision-making.
+***⚠️ METHODOLOGICAL AND USE DISCLAIMER (FOSSI Calc)
+FOSSI Calc implements the FOSSI-F and FOSSI-M indices, derived from a propensity score–based model designed to capture metabolic–osteogenic susceptibility associated with the Fast Ossifier (FO) phenotype in Diffuse Idiopathic Skeletal Hyperostosis (DISH).
+The methodological framework, variable selection, and discriminative performance of these indices are described in detail in:
+Pariente E, Martín-Millán M, Maamar M, et al.
+Metabolic and osteogenic susceptibility in DISH: A prognostic index from propensity score modelling.
+Bone. 2026;117819. https://doi.org/10.1016/j.bone.2026.117819
+FOSSI is not a diagnostic tool and not intended for individual-level clinical prediction. 
+It is a susceptibility stratification index, developed for clinical and epidemiological research, comparative group analyses, pathophysiological interpretation of DISH-related ossification trajectories.
+Target population:
+FOSSI was developed and validated in middle-aged and older adults from a population-based cohort, with and without radiographic DISH, and is intended for use in research settings involving comparable populations. Its applicability to other populations, ethnicities, or clinical contexts has not yet been established.
+Individual clinical interpretation must be performed within the context of a comprehensive medical assessment, and FOSSI Calc outputs should not be used in isolation for clinical decision-making
 """
 
 )
@@ -393,7 +399,5 @@ st.markdown(
 )
 
 st.caption(
-    "Reference: Pariente et al., 'Fast Ossifier in DISH.' RMD Open, Sept 2025. "
-    "https://doi.org/10.1136/rmdopen-2025-006024\n\n"
-    "This tool provides research-oriented risk stratification and does not replace clinical judgment. "
+       "This tool provides research-oriented risk stratification and does not replace clinical judgment. "
 )
