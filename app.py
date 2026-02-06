@@ -95,8 +95,6 @@ FOSSI (Fast Ossifier Stratification Index) provides sex-specific risk stratifica
 - **FOSSI-F (females)** — predominantly insulin resistance–driven  
 - **FOSSI-M (males)** — inflammation / endocrine–driven
 
-This calculator implements the validated equations and thresholds described in the FOSSI manuscript:  
-*Pariente et al., Fast Ossifier Stratification Index (FOSSI): A propensity score–derived tool in DISH (Oct 2025, submitted).*
 
 ***⚠️ METHODOLOGICAL AND USE DISCLAIMER (FOSSI Calc)
 FOSSI Calc implements the FOSSI-F and FOSSI-M indices, derived from a propensity score–based model designed to capture metabolic–osteogenic susceptibility associated with the Fast Ossifier (FO) phenotype in Diffuse Idiopathic Skeletal Hyperostosis (DISH).
@@ -108,7 +106,7 @@ FOSSI is not a diagnostic tool and not intended for individual-level clinical pr
 It is a susceptibility stratification index, developed for clinical and epidemiological research, comparative group analyses, pathophysiological interpretation of DISH-related ossification trajectories.
 Target population:
 FOSSI was developed and validated in middle-aged and older adults from a population-based cohort, with and without radiographic DISH, and is intended for use in research settings involving comparable populations. Its applicability to other populations, ethnicities, or clinical contexts has not yet been established.
-Individual clinical interpretation must be performed within the context of a comprehensive medical assessment, and FOSSI Calc outputs should not be used in isolation for clinical decision-making
+Individual clinical interpretation must be performed within the context of a comprehensive medical assessment, and FOSSI Calc outputs should not be used in isolation for clinical decision-making.
 """
 
 )
