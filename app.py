@@ -101,7 +101,8 @@ FOSSI (Fast Ossifier Stratification Index) provides sex-specific risk stratifica
 The methodological framework, variable selection, and discriminative performance of these indices are described in detail in:
 Pariente E, Martín-Millán M, Maamar M, et al.
 Metabolic and osteogenic susceptibility in DISH: A prognostic index from propensity score modelling.
-Bone. 2026;117819. https://doi.org/10.1016/j.bone.2026.117819
+Bone. 2026;117819. https://doi.org/10.1016/j.bone.2026.117819.
+
 A methodological guide to facilitate interpretation and standardise concepts is available at https://zenodo.org/records/18515089.
 """
 
