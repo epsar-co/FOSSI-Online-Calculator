@@ -97,6 +97,7 @@ FOSSI (Fast Ossifier Stratification Index) provides sex-specific risk stratifica
 
 
 *** FOSSI Calc implements the FOSSI-F and FOSSI-M indices, derived from a propensity score–based model designed to capture metabolic–osteogenic susceptibility associated with the Fast Ossifier (FO) phenotype in Diffuse Idiopathic Skeletal Hyperostosis (DISH).
+
 The methodological framework, variable selection, and discriminative performance of these indices are described in detail in:
 Pariente E, Martín-Millán M, Maamar M, et al.
 Metabolic and osteogenic susceptibility in DISH: A prognostic index from propensity score modelling.
